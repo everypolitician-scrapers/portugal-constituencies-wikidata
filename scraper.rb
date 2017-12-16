@@ -11,7 +11,7 @@ query = <<QUERY
   SELECT DISTINCT ?item ?itemLabel
   WHERE
   {
-    { ?item wdt:P31 wd:Q3032141 } UNION { ?item wdt:P31 wd:Q2914565 }.
+    { ?item wdt:P31 wd:Q41806065 } UNION { ?item wdt:P31 wd:Q2914565 }.
   }
 QUERY
 
