@@ -8,9 +8,7 @@ require 'wikidata/fetcher'
 require 'wikidata/area'
 
 query = <<QUERY
-  SELECT DISTINCT ?item ?itemLabel
-  WHERE
-  {
+  SELECT DISTINCT ?item ?itemLabel WHERE {
     { ?item wdt:P31 wd:Q41806065 } UNION { ?item wdt:P31 wd:Q2914565 }.
   }
 QUERY
@@ -18,6 +16,6 @@ QUERY
 wanted = EveryPolitician::Wikidata.sparql(query)
 raise 'No ids' if wanted.empty?
 
-ScraperWiki.sqliteexecute('DELETE FROM data') rescue nil
 data = Wikidata::Areas.new(ids: wanted).data
+ScraperWiki.sqliteexecute('DROP TABLE data') rescue nil
 ScraperWiki.save_sqlite(%i(id), data)
